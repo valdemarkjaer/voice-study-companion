@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "voice-study-companion"
+version = "0.1.0"
+description = "A provider-neutral, credential-free voice study demonstration"
+requires-python = ">=3.12,<3.13"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/voice_study_companion"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

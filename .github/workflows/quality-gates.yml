@@ -1,0 +1,197 @@
+name: Quality gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-quality:
+    name: Static, unit, dependency, and clean build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONPATH: src
+      VSC_MODE: demo
+    steps:
+      - name: Check out the exported candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install locked Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: 3.12.14
+      - name: Install locked Node for static syntax checks
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.21.0
+      - name: Prepare report directory
+        run: mkdir -p "$RUNNER_TEMP/reports"
+      - name: Check formatting and static syntax
+        run: python tools/ci_quality.py static --report "$RUNNER_TEMP/reports/static-sanity.json"
+      - name: Run the dependency and license gate
+        run: >-
+          python tools/ci_quality.py run
+          --name dependency-license
+          --report "$RUNNER_TEMP/reports/dependency-license.json"
+          -- python tools/generate_dependency_report.py --check
+      - name: Run at least 92 Python unit tests
+        run: python tools/ci_quality.py unit --minimum 92 --report "$RUNNER_TEMP/reports/python-unit.json"
+      - name: Install the hash-locked build toolchain
+        run: >-
+          python -m pip install
+          --disable-pip-version-check
+          --require-hashes
+          --no-deps
+          -r requirements-build.lock
+      - name: Build the wheel from a clean checkout
+        run: >-
+          python tools/ci_quality.py run
+          --name clean-build
+          --report "$RUNNER_TEMP/reports/clean-build.json"
+          -- python -m pip wheel
+          --disable-pip-version-check
+          --no-build-isolation
+          --no-deps
+          --wheel-dir "$RUNNER_TEMP/wheels"
+          .
+      - name: Upload sanitized Python review reports
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: python-review-reports
+          path: |
+            ${{ runner.temp }}/reports/static-sanity.json
+            ${{ runner.temp }}/reports/dependency-license.json
+            ${{ runner.temp }}/reports/python-unit.json
+            ${{ runner.temp }}/reports/clean-build.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  browser-accessibility:
+    name: Browser walkthrough and accessibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONPATH: src
+      VSC_MODE: demo
+    steps:
+      - name: Check out the exported candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install locked Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: 3.12.14
+      - name: Install locked Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.21.0
+      - name: Install locked npm
+        run: npm install --global npm@11.19.0 --ignore-scripts --no-audit --no-fund
+      - name: Install locked browser-test dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Install Playwright browsers
+        run: npx --no-install playwright install --with-deps chromium webkit
+      - name: Prepare report directory
+        run: mkdir -p "$RUNNER_TEMP/reports"
+      - name: Run responsive browser and accessibility gates
+        run: >-
+          python tools/ci_quality.py run
+          --name browser-accessibility
+          --report "$RUNNER_TEMP/reports/browser-accessibility.json"
+          -- npm run test:browser
+      - name: Upload sanitized browser review report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: browser-review-report
+          path: ${{ runner.temp }}/reports/browser-accessibility.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  container-smoke:
+    name: Network-isolated container demo smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out the exported candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare report directory
+        run: mkdir -p "$RUNNER_TEMP/reports"
+      - name: Pull the digest-pinned Python image
+        run: >-
+          docker pull
+          docker.io/library/python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+      - name: Run the complete demo smoke without network or credentials
+        run: |
+          docker run --rm \
+            --network none \
+            --read-only \
+            --cap-drop ALL \
+            --security-opt no-new-privileges \
+            --pids-limit 64 \
+            --memory 256m \
+            --cpus 1 \
+            --user "$(id -u):$(id -g)" \
+            --tmpfs /tmp:rw,noexec,nosuid,nodev,size=16m \
+            --env PYTHONDONTWRITEBYTECODE=1 \
+            --env PYTHONPATH=src \
+            --env VSC_MODE=demo \
+            --volume "$GITHUB_WORKSPACE:/project:ro" \
+            --volume "$RUNNER_TEMP/reports:/reports:rw" \
+            --workdir /project \
+            docker.io/library/python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e \
+            python tools/container_demo_smoke.py --report /reports/container-smoke.json
+      - name: Upload sanitized container review report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: container-smoke-report
+          path: ${{ runner.temp }}/reports/container-smoke.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  candidate-evidence:
+    name: Exported candidate digest
+    needs:
+      - python-quality
+      - browser-accessibility
+      - container-smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Check out the exported candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install locked Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: 3.12.14
+      - name: Create the aggregate candidate digest report
+        run: python tools/ci_quality.py digest --report "$RUNNER_TEMP/candidate-digest.json"
+      - name: Upload only the sanitized digest report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: candidate-digest
+          path: ${{ runner.temp }}/candidate-digest.json
+          if-no-files-found: error
+          retention-days: 7

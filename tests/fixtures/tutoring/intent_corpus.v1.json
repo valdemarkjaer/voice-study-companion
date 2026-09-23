@@ -1,0 +1,24 @@
+{
+  "schema_version": "intent-corpus-v1",
+  "provenance": "Purpose-made synthetic bilingual utterances authored for the public offline test suite.",
+  "scope": "synthetic-clinic-demo",
+  "cases": [
+    {"text": "Qual o significado de Dx?", "expected": "glossary_query"},
+    {"text": "Define SVT.", "expected": "glossary_query"},
+    {"text": "Releia a pergunta.", "expected": "repeat"},
+    {"text": "Repeat question.", "expected": "repeat"},
+    {"text": "Cancelar.", "expected": "stop"},
+    {"text": "Stop audio.", "expected": "stop"},
+    {"text": "Speak in English.", "expected": "switch_language"},
+    {"text": "Explique em português.", "expected": "switch_language"},
+    {"text": "Sim, confirmar.", "expected": "confirm_rating"},
+    {"text": "Set rating to hard.", "expected": "override_rating"}
+  ],
+  "fallback_cases": [
+    {"text": "Pode detalhar o enunciado?", "intent": "clarification", "confidence": 0.96, "can_grade": false},
+    {"text": "Why would the rhythm be narrow?", "intent": "clarification", "confidence": 0.95, "can_grade": false},
+    {"text": "Minha resposta é adenosine", "intent": "answer", "confidence": 0.94, "can_grade": true},
+    {"text": "I think the answer is synchronized cardioversion", "intent": "answer", "confidence": 0.93, "can_grade": true},
+    {"text": "Talvez seja uma dúvida ou uma resposta", "intent": "answer", "confidence": 0.48, "can_grade": false}
+  ]
+}

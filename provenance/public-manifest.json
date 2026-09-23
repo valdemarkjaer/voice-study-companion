@@ -1,0 +1,722 @@
+{
+  "disclosure": "PUBLIC_DESTINATIONS_ONLY",
+  "files": [
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": ".github/workflows/quality-gates.yml",
+      "provenance_id": "public_ci_workflow",
+      "sha256": "855a00edb3c7025e7118c6c887c7e48c2e37826f969243cb83a5dacad718925a",
+      "size": 7350
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": ".gitignore",
+      "provenance_id": "public_gitignore",
+      "sha256": "403a5c342469173ea439e6aaa58f937ea7a4cf64ac16fe4ff7dbe16b08ca82dd",
+      "size": 511
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "CONTRIBUTING.md",
+      "provenance_id": "public_contributing_guide",
+      "sha256": "020c9cd0ae1d554edd491d2958db745fa79f89d4ceeb0e08f16cee051dedefae",
+      "size": 2303
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "LICENSE",
+      "provenance_id": "public_project_license",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size": 11358
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "NOTICE",
+      "provenance_id": "public_project_notice",
+      "sha256": "aabf65bb048a2538296616fdab5f55a4f988c03939d5e8d688870453dd385c49",
+      "size": 204
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "README.md",
+      "provenance_id": "public_readme",
+      "sha256": "805a3560a5a7ab620499858e4279354e5384c72d476850214936ae10a0c2706b",
+      "size": 8090
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "SECURITY.md",
+      "provenance_id": "public_security_policy",
+      "sha256": "8ab5a9931f1669b10386c7ddc45ae693bd1fc29df2abb4b3fb98f616202895af",
+      "size": 2159
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "provenance_id": "public_third_party_notices",
+      "sha256": "3dc8f37f696607bfe44011d0a8cf992bd4a23cfd6cdc07271a2e9ef2633bda85",
+      "size": 4360
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "config.example.env",
+      "provenance_id": "public_demo_config_example",
+      "sha256": "5bf9ab9419cdd489d4ec97c1fe4fb9292d891b8c266ddd041bd3e67ffd8b31ef",
+      "size": 748
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "docs/architecture.md",
+      "provenance_id": "public_architecture_doc",
+      "sha256": "106e673423c06c9783c13dab055bdba4234a268294e6ea747a2b9050bfaecefb",
+      "size": 6805
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "docs/case-study.md",
+      "provenance_id": "public_case_study_doc",
+      "sha256": "2547c124b77971381dab4a5db7741208c6694e2f0f5c6bde3a1decc33502b51f",
+      "size": 5318
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "docs/data-handling.md",
+      "provenance_id": "public_data_handling_doc",
+      "sha256": "9e4d1162ab2f5b6fc695d467ddd3103efa35ae10d7dc9e7b63d125a94dcc4b22",
+      "size": 2847
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "evidence/claims.json",
+      "provenance_id": "public_claims_ledger",
+      "sha256": "04d6bd6ad3ca0d40cacb95070756740fd444f45cfcd6e64cd8711cf4bc015269",
+      "size": 14607
+    },
+    {
+      "license": "MPL-2.0",
+      "mode": "0644",
+      "path": "licenses/MPL-2.0.txt",
+      "provenance_id": "public_mpl_license_text",
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+      "size": 16726
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "media/demo/voice-study-walkthrough.webm",
+      "provenance_id": "public_demo_video",
+      "sha256": "003696b146600c6821facb1d1a99a88070b8ea2281c053e7959ee3d606e0cbc1",
+      "size": 3854082
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "media/screenshots/desktop-evaluation.png",
+      "provenance_id": "public_desktop_screenshot",
+      "sha256": "864db93d05293bda8965fa822407ba0b05f242ec053bb7ab8f27f50f9d7ff9d1",
+      "size": 351339
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "media/screenshots/phone-session.png",
+      "provenance_id": "public_phone_screenshot",
+      "sha256": "221d3d31bf73cc5211b4c530fc321e10eb8e9760343c05cdda8bf3b719674a23",
+      "size": 461782
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "package-lock.json",
+      "provenance_id": "public_demo_package_lock",
+      "sha256": "8672576911cc036cb8b62a6f386565253fbe8f384039ffa9685c9a5ec9b830f2",
+      "size": 1295
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "package.json",
+      "provenance_id": "public_demo_package_json",
+      "sha256": "aec88c33e778074c1d5bfc513d9fe41892f493294382b45213f276e8b8ec4f54",
+      "size": 295
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "pyproject.toml",
+      "provenance_id": "public_demo_pyproject",
+      "sha256": "0c37d9812f2e02c2c9c1a7d7d43ee30f07e68b115184302c8c472da92b297396",
+      "size": 450
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "reports/dependency-licenses.json",
+      "provenance_id": "public_dependency_license_report",
+      "sha256": "b4fa934c0f17318015a06822b017a17b3fefe7b6905687a5db91a1a4d2d3dd18",
+      "size": 3489
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "reports/media-review.json",
+      "provenance_id": "public_media_review",
+      "sha256": "9311357854585cee493e7ac8c1df60cf27168454b8cba91f67f58e244fbc742c",
+      "size": 2889
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "requirements-build.lock",
+      "provenance_id": "public_demo_python_build_lock",
+      "sha256": "00c28ca45fb7d13179026fe735bfd6d2367bb758cd5e101ea33f8bfdfed46309",
+      "size": 659
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/__init__.py",
+      "provenance_id": "public_demo_package_init",
+      "sha256": "278dd4e986e51ac1ad73a86953b630672bd796fb23f34b848567758a2ab5d66c",
+      "size": 1523
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/config.py",
+      "provenance_id": "public_demo_config_source",
+      "sha256": "03e007baa1e0bfa8c56f6055d2e187e092717bc6044c6fae233ae00ddf20a4f8",
+      "size": 4570
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/contracts.py",
+      "provenance_id": "public_demo_contracts_source",
+      "sha256": "15705944c585265b6cdfeaed0e431261a515dc97902a3c425ee9c2134850d029",
+      "size": 13466
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/__init__.py",
+      "provenance_id": "core_package_init",
+      "sha256": "eb1c244e421b872fcc478262491e728538671b785ce9ec8d30e1df5a90805623",
+      "size": 1101
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/cancellation.py",
+      "provenance_id": "core_cancellation",
+      "sha256": "6dcab3f54c16b52c0f74986abe1dd1273b8b0a58294753bc99882f6248baa354",
+      "size": 5387
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/domain.py",
+      "provenance_id": "core_domain",
+      "sha256": "c9e369efd79e7ecb7ede68d07570c27161b657bc2ee3eca580531395971df037",
+      "size": 11376
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/fixtures.py",
+      "provenance_id": "core_fixtures_loader",
+      "sha256": "1b79a29e7dfbe81c4141714fda473903dc437b4b929e65fdd21b2167d26372ef",
+      "size": 9914
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/orchestrator.py",
+      "provenance_id": "core_orchestrator",
+      "sha256": "cafe8e814984eaffd2466efce6beb6195d7609c770eed1fd6c0ea67b217afa14",
+      "size": 45133
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/ports.py",
+      "provenance_id": "core_ports",
+      "sha256": "d9b76c3d5a111c7debba99da84ca48677b7de5adab8f21295c45a5a023ecbf5f",
+      "size": 3166
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/routing.py",
+      "provenance_id": "core_routing",
+      "sha256": "faf74dae6d3f9df8b6924f68768aa6ee787a1b189a1b7482d1d8862c06f9635b",
+      "size": 9206
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/core/state.py",
+      "provenance_id": "core_state",
+      "sha256": "4cf5bfda9574e3db48c39980d14d861f275009752dd90fcd357ff730bb33a396",
+      "size": 20053
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/demo/__init__.py",
+      "provenance_id": "public_demo_demo_init",
+      "sha256": "f9999ca9a44f06b713735384ce7cbbb770f92186e2df18be961ba8c604c98035",
+      "size": 616
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/demo/deck.py",
+      "provenance_id": "public_demo_synthetic_deck_source",
+      "sha256": "569f2413183eb74320cd9a4e5d872ef5ed4a814fa154083263a13a317f742277",
+      "size": 13571
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/demo/providers.py",
+      "provenance_id": "public_demo_fake_providers_source",
+      "sha256": "1ae4fb21b1de055017ff1c12febf41341d0369055a2afa298feb5bdef0671b58",
+      "size": 7201
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/demo/session.py",
+      "provenance_id": "public_demo_session_source",
+      "sha256": "5a0c8e54b0dc36ac5b5c6698f496a831c986f9750d353312bf4b30fb86b0224a",
+      "size": 7658
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/knowledge/__init__.py",
+      "provenance_id": "knowledge_package_init",
+      "sha256": "946c8aa17384b43eac188d4489588a0578566ce13daf90363897d8c52139b354",
+      "size": 73
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/knowledge/medical_glossary_v1.py",
+      "provenance_id": "knowledge_medical_glossary",
+      "sha256": "58daac4ad0c95862dd69cbad1d4606385d147e0e403a24e38267015aa2833c9d",
+      "size": 6411
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/providers/__init__.py",
+      "provenance_id": "public_providers_package_init",
+      "sha256": "783a2c2290733a640f427482e010b1bfb985056d80c9bb8c24aecdfd4523734c",
+      "size": 299
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/providers/fake.py",
+      "provenance_id": "provider_fake",
+      "sha256": "e693ee5803c9e8e8e715919a72c6b79a91d154c283687587908c6180a75b00e3",
+      "size": 10698
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/server.py",
+      "provenance_id": "public_demo_server_source",
+      "sha256": "0d8967c086be5947ae57da2f935c9888b4e556430ae61836f27ec9cd13381274",
+      "size": 15129
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/__init__.py",
+      "provenance_id": "tutoring_package_init",
+      "sha256": "7a5142f1131ce13f328130dab875cce187006ce09e7e68ff86a434b8ff0cd99c",
+      "size": 71
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/contexts.py",
+      "provenance_id": "tutoring_contexts",
+      "sha256": "d02f616c779a570ec08d15930666c17830702b65a6972bd018afb6530daf25b4",
+      "size": 9379
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/glossary.py",
+      "provenance_id": "tutoring_glossary",
+      "sha256": "3c68dc1e741bd9aeee938f1ad5cf42c805341f4ac252b62b0ad6262a79b74f87",
+      "size": 8802
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/grading.py",
+      "provenance_id": "tutoring_grading",
+      "sha256": "0e209a7a377b635c5b2e14c0da5db94ae01192d1e5c0beb1a30de180e9654a8b",
+      "size": 8511
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/intents.py",
+      "provenance_id": "tutoring_intents",
+      "sha256": "d0f1fb99775d94bb548d229d3dafa8c186892fc8b008205b977dc515bc244b75",
+      "size": 16096
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/language.py",
+      "provenance_id": "tutoring_language",
+      "sha256": "b366044f82bfc5846f87a0b377b6c65d83751edf3bb8e74903772cac14b1b75d",
+      "size": 5514
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/representations.py",
+      "provenance_id": "tutoring_representations",
+      "sha256": "61ceff8a66ad05ba4814d66dbfbc86fcbf43a40549962c1fc0ed0d8da6a1754b",
+      "size": 8904
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "src/voice_study_companion/tutoring/review.py",
+      "provenance_id": "tutoring_review",
+      "sha256": "7298c3a9fc6de446d5dd75fc4845408c13a22b546d26c33b85cbced3595a52cb",
+      "size": 9169
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/browser/accessibility.test.mjs",
+      "provenance_id": "public_accessibility_browser_test",
+      "sha256": "95da9ba0814a902efb7ff3c0e81b34ee30f54f76f38c3b24f2bcd5817bc02818",
+      "size": 24553
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/browser/demo-ui.test.mjs",
+      "provenance_id": "public_demo_browser_walkthrough_test",
+      "sha256": "67d2ab73809826db2afe8e1169aad54f1a2580e2a2ebca17a37a580d4f829ce9",
+      "size": 5288
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/browser/pcm-ring-buffer.test.mjs",
+      "provenance_id": "test_web_pcm",
+      "sha256": "5363616f5dc361c51d8b1a7d787c0be0f18ccee2f332775d998f8b30a3296a18",
+      "size": 5317
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/browser/playback-handshake.test.mjs",
+      "provenance_id": "test_web_playback_handshake",
+      "sha256": "30a16880dc65f0fc41dda5145aed591229ec011ddbbd9135c66097ffb96ac512",
+      "size": 4796
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/fixtures/tutoring/intent_corpus.v1.json",
+      "provenance_id": "fixture_intent_corpus",
+      "sha256": "c2346a2debaf239f1c6fdffb0d624edd9ba76f8599d0cf496542f18d04a9ebe4",
+      "size": 1413
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/fixtures/voice_pipeline/v1/audio.json",
+      "provenance_id": "fixture_audio_recipes",
+      "sha256": "d9edff2ad64771ddc42d526294f336f77e06abab84e840a5fbaca39cdc3004b9",
+      "size": 3758
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/fixtures/voice_pipeline/v1/audio.schema.json",
+      "provenance_id": "fixture_audio_schema",
+      "sha256": "f1527d19383450e1b6ea3aebf2c153c9dde93d386ad5eac35a1618dc1cc9c962",
+      "size": 1984
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/fixtures/voice_pipeline/v1/card.schema.json",
+      "provenance_id": "fixture_card_schema",
+      "sha256": "cedcf8883d3dfac16662574dc1f2020cd7c32b2311e5f47717d83975be23a49d",
+      "size": 2647
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/fixtures/voice_pipeline/v1/cards.json",
+      "provenance_id": "fixture_card_corpus",
+      "sha256": "edad070d97d0f71a367351fa3d6bf5eab252f7bc56e3091d76d7828542b1425a",
+      "size": 6287
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_config.py",
+      "provenance_id": "public_demo_test_config",
+      "sha256": "cbc2d0609aae89b836be573b519c1f291a4741a8879b58c363c78db91c3c7b3e",
+      "size": 3500
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_contracts.py",
+      "provenance_id": "public_demo_test_contracts",
+      "sha256": "0db1113452f10ee703540a79d99512a0c173765310407858ddf92db213eaf85a",
+      "size": 11381
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_core_cancellation.py",
+      "provenance_id": "test_core_cancellation",
+      "sha256": "90e2e158c02ac48cd9df095527c3a228f51079b9eb7986f246ff7cabdf1eba57",
+      "size": 2781
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_core_domain.py",
+      "provenance_id": "test_core_domain",
+      "sha256": "455c4e7ae65beb482e2505b5362cbd81748d28503c1d20bc9d95bb4834776fd0",
+      "size": 12559
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_core_fixtures.py",
+      "provenance_id": "test_core_fixtures",
+      "sha256": "d3feec4aed975540d5f66b04d75b966afc003958778aac4451c75f48b6d1cc9a",
+      "size": 4282
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_core_routing.py",
+      "provenance_id": "test_core_routing",
+      "sha256": "5d791147d4546accaf50e92fb17d6ebe9deee016b05b85d54ca284e0aaede72a",
+      "size": 6485
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_core_state.py",
+      "provenance_id": "test_core_state",
+      "sha256": "67065cbc4ba05b2d6eda09990c9e449ee061dfea59af39193bff266ea7650732",
+      "size": 20256
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_demo_e2e.py",
+      "provenance_id": "public_demo_test_e2e",
+      "sha256": "07a24617399427be20933c7e8868ea898025ec77625b8b89567b9127f9a61f5e",
+      "size": 3253
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_dependency_report.py",
+      "provenance_id": "public_dependency_report_test",
+      "sha256": "80e141f97976d409d0e255c7cfb6df1e20a8b284d1e986cb3d2b1472e4aebaee",
+      "size": 2677
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_fake_providers.py",
+      "provenance_id": "public_demo_test_fake_providers",
+      "sha256": "8a69ae53ddaeb594d0e27d95365fab5fbc3e7bb750cb3b3630a2c4e3a46dcbc0",
+      "size": 4191
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_server.py",
+      "provenance_id": "public_demo_test_server",
+      "sha256": "364970c0af83af4705fb6a4a9121a2d379d6a263e9cb01f0f2cfd3dacb8f80c8",
+      "size": 5180
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_synthetic_deck.py",
+      "provenance_id": "public_demo_test_synthetic_deck",
+      "sha256": "2e4613ca37d76d45381d5869461387a0d12a5a975dc3d8455b8d61f5bab9429d",
+      "size": 4517
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_tutoring_contexts.py",
+      "provenance_id": "test_tutoring_contexts",
+      "sha256": "534bbe217242351e0f774bf9568f5bf53119d7c7a8133a69f1f2eb76cb7183ef",
+      "size": 6820
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_tutoring_glossary_language.py",
+      "provenance_id": "test_tutoring_glossary_language",
+      "sha256": "0469c5b64dc3b5f0ca87c4c97c84d8c01e634c9527a8058ac00a71419c8409eb",
+      "size": 7045
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_tutoring_grading_review.py",
+      "provenance_id": "test_tutoring_grading_review",
+      "sha256": "3fa8b790e353fb67a1836db4b9853d8b0fda91a94acd2ccb3b43916e45882de7",
+      "size": 10272
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tests/test_tutoring_intents.py",
+      "provenance_id": "test_tutoring_intents",
+      "sha256": "a67222d4e14b7b3b92a31b776bbfd1e59d73998177dd368e797069321289748a",
+      "size": 7467
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "toolchain.lock.json",
+      "provenance_id": "public_toolchain_lock",
+      "sha256": "2a5813e33e3ce1d827e78c13403ca2a5ab884f1b8c24379a40d6ef323f643906",
+      "size": 712
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tools/ci_quality.py",
+      "provenance_id": "public_ci_quality_tool",
+      "sha256": "ee3a84469edc922f9b49860033e36f61000dd373b1e260b59448643be9f81e4f",
+      "size": 14412
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tools/container_demo_smoke.py",
+      "provenance_id": "public_container_demo_smoke_tool",
+      "sha256": "6643b1f9c4fc014e0a7a0f8a8ae2dbf5e8b12fa4142d0a5a1618ae28c9390471",
+      "size": 5897
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "tools/generate_dependency_report.py",
+      "provenance_id": "public_dependency_report_tool",
+      "sha256": "eb0183a637af7fdc2af5e9d83360cde738d382de0a74a6a316a361b2c0ce0bfc",
+      "size": 8051
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/app.js",
+      "provenance_id": "public_demo_web_app",
+      "sha256": "3d124ae3753720f627582953ed6cfe5500b2b9a9982ec7681abed1a1b1a2f4eb",
+      "size": 11356
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/audio/audio-capture-worklet.js",
+      "provenance_id": "web_audio_capture_worklet",
+      "sha256": "fcf9532b281acfb56558425cedf5a90532b6e3c662c8053b9fb4b3711ec69032",
+      "size": 3118
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/audio/audio-controller.js",
+      "provenance_id": "web_staged_audio",
+      "sha256": "a49a840a86a94a7d75fe1da491286eb2f8ed7cf80c7bbf69bbb0761531e761b3",
+      "size": 6562
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/audio/pcm-capture.mjs",
+      "provenance_id": "web_pcm_capture",
+      "sha256": "aaf8f85cdb26fa2323f18a736d6a83bd49df6cc8131b6cb25a36044d63c84ae0",
+      "size": 1534
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/audio/pcm-player-worklet.js",
+      "provenance_id": "web_pcm_player_worklet",
+      "sha256": "05ce8b5b8b45f922777a601f70326c673fca37a8e894885ab35f72c0dbff5d25",
+      "size": 1780
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/audio/pcm-ring-buffer.mjs",
+      "provenance_id": "web_pcm_ring_buffer",
+      "sha256": "ca47498002522646eb67b31b7c47045af4000ae8792a4635c0ab87d37c4c7d0f",
+      "size": 8151
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/audio/playback-handshake.mjs",
+      "provenance_id": "web_playback_handshake",
+      "sha256": "241ae1fb413b7f2a940f9d06cbcc4d7f19b8ea081e43d75252529901cd2d78bf",
+      "size": 4745
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/index.html",
+      "provenance_id": "public_demo_web_html",
+      "sha256": "e7de474cd8a705c788ff1149031dccaecb2923411a762a3feffd569c6ccefb80",
+      "size": 8074
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
+      "path": "web/styles.css",
+      "provenance_id": "public_demo_web_styles",
+      "sha256": "3d289d881f08bc2d7593f9fd8f768cb81a490ef1e4d85c93c3b2ead05a97c446",
+      "size": 14414
+    }
+  ],
+  "payload_tree_sha256": "2f1f86fa00952b069f80ec1b2944e25c033afdefb025596e95c912f972e36793",
+  "project": "voice-study-companion",
+  "project_license": "Apache-2.0",
+  "schema": "voice-study-companion.public-provenance",
+  "schema_version": 1
+}

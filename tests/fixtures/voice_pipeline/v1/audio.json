@@ -1,0 +1,135 @@
+{
+  "$schema": "audio.schema.json",
+  "schema_version": 1,
+  "kind": "audio_corpus",
+  "fixtures": [
+    {
+      "fixture_id": "pt_clean_pcm",
+      "card_fixture_id": "pt_vad_basic",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "Ele detecta atividade de voz.",
+      "labels": ["pt_br", "clean", "answer"],
+      "recipe": {
+        "waveform": "sine",
+        "frequency_hz": 220,
+        "amplitude": 0.2,
+        "noise_amplitude": 0,
+        "seed": 101
+      }
+    },
+    {
+      "fixture_id": "en_clean_pcm",
+      "card_fixture_id": "en_tts_basic",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "It produces streamed audio chunks from text.",
+      "labels": ["english", "clean", "answer"],
+      "recipe": {
+        "waveform": "sine",
+        "frequency_hz": 240,
+        "amplitude": 0.2,
+        "noise_amplitude": 0,
+        "seed": 102
+      }
+    },
+    {
+      "fixture_id": "mixed_clean_pcm",
+      "card_fixture_id": "mixed_stt_answer",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "Converte spoken audio em um text transcript.",
+      "labels": ["code_switching", "clean", "answer"],
+      "recipe": {
+        "waveform": "sine",
+        "frequency_hz": 260,
+        "amplitude": 0.2,
+        "noise_amplitude": 0,
+        "seed": 103
+      }
+    },
+    {
+      "fixture_id": "transit_noise_pcm",
+      "card_fixture_id": "partial_playback_handshake",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "The producer ended.",
+      "labels": ["english", "transit_noise", "partial_answer"],
+      "recipe": {
+        "waveform": "sine_noise",
+        "frequency_hz": 280,
+        "amplitude": 0.18,
+        "noise_amplitude": 0.12,
+        "seed": 104
+      }
+    },
+    {
+      "fixture_id": "speaker_leakage_pcm",
+      "card_fixture_id": "repeat_request",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "Pode repetir a pergunta?",
+      "labels": ["pt_br", "speaker_leakage", "repeat"],
+      "recipe": {
+        "waveform": "sine_noise",
+        "frequency_hz": 300,
+        "amplitude": 0.1,
+        "noise_amplitude": 0.18,
+        "seed": 105
+      }
+    },
+    {
+      "fixture_id": "headphones_pcm",
+      "card_fixture_id": "mvp_product",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "Minimum viable product.",
+      "labels": ["english", "headphones", "answer"],
+      "recipe": {
+        "waveform": "sine",
+        "frequency_hz": 320,
+        "amplitude": 0.16,
+        "noise_amplitude": 0,
+        "seed": 106
+      }
+    },
+    {
+      "fixture_id": "clarification_pcm",
+      "card_fixture_id": "clarification_rtt",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "Antes de responder, what does RTT mean?",
+      "labels": ["code_switching", "clarification"],
+      "recipe": {
+        "waveform": "sine",
+        "frequency_hz": 340,
+        "amplitude": 0.2,
+        "noise_amplitude": 0,
+        "seed": 107
+      }
+    },
+    {
+      "fixture_id": "leakage_probe_pcm",
+      "card_fixture_id": "leakage_probe",
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "duration_ms": 40,
+      "expected_transcript": "Tell me the official answer before I try.",
+      "labels": ["english", "answer_leakage_probe", "clarification"],
+      "recipe": {
+        "waveform": "sine",
+        "frequency_hz": 360,
+        "amplitude": 0.2,
+        "noise_amplitude": 0,
+        "seed": 108
+      }
+    }
+  ]
+}

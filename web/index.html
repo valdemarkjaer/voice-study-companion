@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#193f35" />
+    <meta
+      name="description"
+      content="Demonstração local e determinística de uma experiência de estudo por voz."
+    />
+    <title>Voice Study Companion — Demo local</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#study-card">Ir para o cartão atual</a>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Voice Study Companion, início">
+          <span class="brand-mark" aria-hidden="true">VS</span>
+          <span>
+            <strong>Voice Study Companion</strong>
+            <small>demo local · conteúdo sintético</small>
+          </span>
+        </a>
+        <div class="topbar-actions">
+          <span class="privacy-pill">
+            <span class="status-dot" aria-hidden="true"></span>
+            Sem nuvem
+          </span>
+          <button class="icon-button" id="help-button" type="button" aria-label="Sobre a demonstração">
+            ?
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="session-panel" aria-labelledby="session-title">
+          <div>
+            <p class="eyebrow">Sessão guiada</p>
+            <h1 id="session-title">Pense em voz alta.</h1>
+            <p class="session-lede">
+              Um fluxo de estudo bilíngue que protege seu tempo de pensar e só
+              revela a resposta oficial quando você pedir.
+            </p>
+          </div>
+
+          <div class="progress-block" aria-label="Progresso da sessão">
+            <div class="progress-copy">
+              <span id="progress-label">Cartão 1 de 3</span>
+              <strong id="progress-percent">33%</strong>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progress-bar"></span>
+            </div>
+          </div>
+
+          <fieldset class="mode-picker">
+            <legend>Perfil da sessão</legend>
+            <label class="mode-option">
+              <input type="radio" name="study-mode" value="full" checked />
+              <span>
+                <strong>Completo</strong>
+                <small>Texto, imagem e áudio sintéticos</small>
+              </span>
+            </label>
+            <label class="mode-option">
+              <input type="radio" name="study-mode" value="transit" />
+              <span>
+                <strong>Em trânsito</strong>
+                <small>Seleciona apenas cartões de texto</small>
+              </span>
+            </label>
+          </fieldset>
+
+          <dl class="session-facts">
+            <div>
+              <dt>Rota</dt>
+              <dd>Determinística</dd>
+            </div>
+            <div>
+              <dt>Custo externo</dt>
+              <dd>US$ 0,00</dd>
+            </div>
+            <div>
+              <dt>Dados enviados</dt>
+              <dd>Nenhum</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <section class="study-column" aria-label="Área de estudo">
+          <div class="phase-banner" role="status" aria-live="polite" aria-atomic="true">
+            <span class="phase-icon" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </span>
+            <span>
+              <small id="phase-kicker">Sua vez</small>
+              <strong id="phase-status">Pense com calma; envie quando concluir.</strong>
+            </span>
+          </div>
+
+          <article class="study-card" id="study-card" tabindex="-1">
+            <header class="card-header">
+              <div>
+                <p class="eyebrow" id="card-kind">Terminologia bilíngue</p>
+                <h2 id="card-title">Cartão atual</h2>
+              </div>
+              <span class="content-badge" id="content-badge">Somente texto</span>
+            </header>
+
+            <div class="card-prompt" id="card-prompt">
+              <p class="loading-copy">Preparando o baralho sintético…</p>
+            </div>
+
+            <figure class="card-image" id="card-image" hidden>
+              <div id="card-image-canvas"></div>
+              <figcaption id="card-image-caption"></figcaption>
+            </figure>
+
+            <div class="card-audio" id="card-audio" hidden>
+              <button class="secondary-button" id="play-card-audio" type="button">
+                Reproduzir áudio do cartão
+              </button>
+              <span id="card-audio-label"></span>
+            </div>
+
+            <ul class="term-list" id="term-list" aria-label="Termos disponíveis"></ul>
+
+            <form class="answer-panel" id="answer-form">
+              <label for="answer-input">Sua resposta</label>
+              <textarea
+                id="answer-input"
+                name="answer"
+                rows="3"
+                placeholder="Fale ou escreva em português, English, ou misture os dois."
+                autocomplete="off"
+              ></textarea>
+              <div class="answer-actions">
+                <button class="voice-button" id="fake-microphone" type="button">
+                  <span class="mic-glyph" aria-hidden="true"></span>
+                  Simular resposta por voz
+                </button>
+                <button class="primary-button" id="evaluate-answer" type="submit">
+                  Avaliar resposta
+                </button>
+              </div>
+            </form>
+
+            <section class="evaluation" id="evaluation" aria-live="polite" hidden>
+              <div class="evaluation-heading">
+                <span class="verdict-mark" id="verdict-mark" aria-hidden="true">✓</span>
+                <div>
+                  <p class="eyebrow" id="verdict-label">Avaliação</p>
+                  <h3 id="evaluation-title">Resposta avaliada</h3>
+                </div>
+              </div>
+              <p id="evaluation-explanation"></p>
+              <div class="concept-grid">
+                <div>
+                  <h4>Você cobriu</h4>
+                  <ul id="covered-concepts"></ul>
+                </div>
+                <div>
+                  <h4>Ainda faltou</h4>
+                  <ul id="missing-concepts"></ul>
+                </div>
+              </div>
+              <div class="official-answer-actions">
+                <button class="secondary-button" id="request-official-answer" type="button">
+                  Mostrar resposta oficial
+                </button>
+                <p>A resposta não é repetida automaticamente.</p>
+              </div>
+              <blockquote class="official-answer" id="official-answer" hidden>
+                <small>Resposta oficial</small>
+                <p id="official-answer-copy"></p>
+              </blockquote>
+            </section>
+          </article>
+
+          <nav class="session-actions" aria-label="Controles da sessão">
+            <button class="text-button" id="close-session" type="button">Encerrar e sincronizar</button>
+            <button class="primary-button next-button" id="next-card" type="button" disabled>
+              Próximo cartão <span aria-hidden="true">→</span>
+            </button>
+          </nav>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="about-dialog" aria-labelledby="about-title">
+      <button class="dialog-close" id="close-help" type="button" aria-label="Fechar">×</button>
+      <p class="eyebrow">Sobre este protótipo</p>
+      <h2 id="about-title">Feito para ser inspecionável.</h2>
+      <p>
+        Esta demonstração usa cartões originais, provedores simulados e nenhuma
+        credencial. Integrações reais são opcionais e permanecem desligadas.
+      </p>
+      <ul>
+        <li>Nenhuma coleção pessoal</li>
+        <li>Nenhuma chamada a modelo pago</li>
+        <li>Nenhum áudio do usuário é persistido</li>
+      </ul>
+    </dialog>
+  </body>
+</html>

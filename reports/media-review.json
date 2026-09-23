@@ -1,0 +1,82 @@
+{
+  "schema": "voice-study-companion.media-review",
+  "schema_version": 1,
+  "review_date": "2026-09-22",
+  "fixture_boundary": "purpose-made synthetic demo content only",
+  "artifacts": [
+    {
+      "path": "media/screenshots/phone-session.png",
+      "sha256": "221d3d31bf73cc5211b4c530fc321e10eb8e9760343c05cdda8bf3b719674a23",
+      "bytes": 461782,
+      "media_type": "image/png",
+      "dimensions": {
+        "width": 780,
+        "height": 1688
+      },
+      "metadata_inspection": {
+        "png_chunk_types": [
+          "IHDR",
+          "IDAT",
+          "IEND"
+        ],
+        "exif": false,
+        "text_chunks": false,
+        "color_profile": false,
+        "timestamp": false
+      },
+      "manual_review": "PASS: synthetic phone layout only; no browser chrome, personal data, credentials, private topology, real study content, or third-party media is visible."
+    },
+    {
+      "path": "media/screenshots/desktop-evaluation.png",
+      "sha256": "864db93d05293bda8965fa822407ba0b05f242ec053bb7ab8f27f50f9d7ff9d1",
+      "bytes": 351339,
+      "media_type": "image/png",
+      "dimensions": {
+        "width": 1440,
+        "height": 1377
+      },
+      "metadata_inspection": {
+        "png_chunk_types": [
+          "IHDR",
+          "IDAT",
+          "IEND"
+        ],
+        "exif": false,
+        "text_chunks": false,
+        "color_profile": false,
+        "timestamp": false
+      },
+      "manual_review": "PASS: synthetic desktop evaluation only; no personal data, credentials, private topology, real study content, or third-party media is visible."
+    },
+    {
+      "path": "media/demo/voice-study-walkthrough.webm",
+      "sha256": "003696b146600c6821facb1d1a99a88070b8ea2281c053e7959ee3d606e0cbc1",
+      "bytes": 3854082,
+      "media_type": "video/webm",
+      "dimensions": {
+        "width": 1280,
+        "height": 720
+      },
+      "duration_seconds": 62.84,
+      "tracks": {
+        "video": 1,
+        "audio": 0
+      },
+      "metadata_inspection": {
+        "creation_time_removed": true,
+        "identifying_tags_found": [],
+        "remaining_structural_identifiers": [
+          "WebM container",
+          "V_VP8 codec identifier",
+          "ENCODER=Lavf61.1.100 (generic muxer)",
+          "DURATION=00:01:02.840000000 (structural stream duration)"
+        ],
+        "generated_thumbnails": []
+      },
+      "manual_review": "PASS: start, response, evaluation, answer-on-request, advance, and visible close states were reviewed across the 62.84-second recording; all visible content is synthetic and the file has no audible track. No personal, copyrighted study, credential-bearing, or operational detail was found."
+    }
+  ],
+  "review_outcome": "PASS",
+  "review_scope": "visible content, audible content, file/container metadata, and generated-thumbnail absence",
+  "artifact_scope": "SOURCE_REPOSITORY_EVIDENCE_ONLY"
+}

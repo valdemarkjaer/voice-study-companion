@@ -1,0 +1,38 @@
+# Local credentials and environment overrides
+.env
+.env.*
+*.local.env
+config.env
+config.*.env
+!config.example.env
+
+# Python environments, caches, coverage, and build output
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Node and browser-test output
+node_modules/
+playwright-report/
+test-results/
+blob-report/
+
+# Editor and operating-system artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:voice-study-companion:fixtures:voice-pipeline:v1:card",
+  "title": "Voice Study Companion synthetic card corpus v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema_version", "kind", "fixtures"],
+  "properties": {
+    "$schema": {"const": "card.schema.json"},
+    "schema_version": {"const": 1},
+    "kind": {"const": "card_corpus"},
+    "fixtures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fixture_id", "languages", "question", "official_answer",
+          "learner_utterance", "expected_intent", "expected_grade",
+          "labels", "abbreviations", "must_not_reveal"
+        ],
+        "properties": {
+          "fixture_id": {"type": "string", "minLength": 1},
+          "languages": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          },
+          "question": {"type": "string", "minLength": 1},
+          "official_answer": {"type": "string", "minLength": 1},
+          "learner_utterance": {"type": "string", "minLength": 1},
+          "expected_intent": {
+            "enum": ["answer", "clarification", "repeat", "control", "discussion"]
+          },
+          "expected_grade": {
+            "type": ["string", "null"],
+            "enum": ["correct", "partial", "incorrect", "ungradable", null]
+          },
+          "labels": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          },
+          "abbreviations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["surface", "meanings", "expected_expansion", "ambiguous"],
+              "properties": {
+                "surface": {"type": "string", "minLength": 1},
+                "meanings": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {"type": "string", "minLength": 1}
+                },
+                "expected_expansion": {"type": ["string", "null"]},
+                "ambiguous": {"type": "boolean"}
+              }
+            }
+          },
+          "must_not_reveal": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    }
+  }
+}

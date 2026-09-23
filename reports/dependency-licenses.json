@@ -1,0 +1,104 @@
+{
+  "assets": {
+    "fonts": "NONE_DISTRIBUTED",
+    "icons": "CSS_AND_TEXT_ONLY_NO_ICON_FILES",
+    "models": "NONE_DISTRIBUTED",
+    "opaque_images": "NONE_DISTRIBUTED",
+    "recorded_audio": "NONE_DISTRIBUTED",
+    "synthetic_media": "GENERATED_FROM_PROJECT_SOURCE_RECIPES"
+  },
+  "dependencies": {
+    "javascript": [
+      {
+        "integrity": "sha512-+7ziBLidS4NaNCdt57SUDT+wYmmd5fmiQejUic/kb+YsYSCPyOOE9sebzMjNmQrsnNpDJqd4WHvV/8lfKfUDUg==",
+        "license": "Apache-2.0",
+        "lock_license": "Apache-2.0",
+        "name": "playwright",
+        "notice": "THIRD_PARTY_NOTICES.md#playwright-1630-and-playwright-core-1630",
+        "review_status": "APPROVED",
+        "use": "development-only",
+        "version": "1.63.0"
+      },
+      {
+        "integrity": "sha512-rYCsBF/M5HjUch52bbtVONEFjv6Xu8sm8h72dNlR5bzIE1fvC/bxgspzkjSfU+MweEMmPM8KJebG6nnyxo5mCg==",
+        "license": "Apache-2.0",
+        "lock_license": "Apache-2.0",
+        "name": "playwright-core",
+        "notice": "THIRD_PARTY_NOTICES.md#playwright-1630-and-playwright-core-1630",
+        "review_status": "APPROVED",
+        "use": "development-only",
+        "version": "1.63.0"
+      }
+    ],
+    "python_build": [
+      {
+        "license": "MIT",
+        "name": "hatchling",
+        "notice": "THIRD_PARTY_NOTICES.md#hatchling-1270",
+        "review_status": "APPROVED",
+        "sha256": "d3a2f3567c4f926ea39849cdf924c7e99e6686c9c8e288ae1037c8fa2a5d937b",
+        "use": "build-only",
+        "version": "1.27.0"
+      },
+      {
+        "license": "Apache-2.0 OR BSD-2-Clause",
+        "name": "packaging",
+        "notice": "THIRD_PARTY_NOTICES.md#packaging-263",
+        "review_status": "APPROVED",
+        "selected_license": "Apache-2.0",
+        "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+        "use": "build-only",
+        "version": "26.3"
+      },
+      {
+        "license": "MPL-2.0",
+        "name": "pathspec",
+        "notice": "licenses/MPL-2.0.txt",
+        "review_status": "APPROVED",
+        "sha256": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189",
+        "use": "build-only",
+        "version": "1.1.1"
+      },
+      {
+        "license": "MIT",
+        "name": "pluggy",
+        "notice": "THIRD_PARTY_NOTICES.md#pluggy-160",
+        "review_status": "APPROVED",
+        "sha256": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746",
+        "use": "build-only",
+        "version": "1.6.0"
+      },
+      {
+        "license": "Apache-2.0",
+        "name": "trove-classifiers",
+        "notice": "LICENSE",
+        "review_status": "APPROVED",
+        "sha256": "8b1ff4f9c191b1040b71c37f1e445ab99732911e3cd91de52838453a854d7a17",
+        "use": "build-only",
+        "version": "2026.9.21.13"
+      }
+    ]
+  },
+  "evidence_date": "2026-09-22",
+  "excluded_artifacts": [
+    "browser binaries",
+    "node_modules",
+    "Python wheels",
+    "virtual environments"
+  ],
+  "generator": "tools/generate_dependency_report.py@1",
+  "locks": {
+    "javascript": {
+      "path": "package-lock.json",
+      "sha256": "8672576911cc036cb8b62a6f386565253fbe8f384039ffa9685c9a5ec9b830f2"
+    },
+    "python_build": {
+      "path": "requirements-build.lock",
+      "sha256": "00c28ca45fb7d13179026fe735bfd6d2367bb758cd5e101ea33f8bfdfed46309"
+    }
+  },
+  "project_runtime_dependencies": [],
+  "schema": "voice-study-companion.dependency-license-report",
+  "schema_version": 1,
+  "status": "COMPLETE_FOR_LOCKED_GRAPH"
+}

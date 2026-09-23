@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "python": {
+    "version": "3.12.14",
+    "release_url": "https://www.python.org/downloads/release/python-31214/"
+  },
+  "node": {
+    "version": "24.21.0",
+    "npm_version": "11.19.0",
+    "release_url": "https://nodejs.org/en/download/archive/v24.21.0"
+  },
+  "container_images": [
+    {
+      "reference": "docker.io/library/python:3.12.14-slim-bookworm",
+      "digest": "sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e",
+      "purpose": "clean build and credential-free demo smoke",
+      "distributed": false
+    }
+  ],
+  "policy": {
+    "runtime_binaries_are_not_vendored": true,
+    "container_images_must_be_digest_pinned_before_release": true
+  }
+}
