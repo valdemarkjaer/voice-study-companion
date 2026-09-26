@@ -22,12 +22,20 @@ from .demo.deck import build_synthetic_deck
 from .demo.session import DemoSession, PublicCard, SessionView
 
 
-WEB_ROOT = Path(__file__).resolve().parents[2] / "web"
-STATIC_FILES = {
-    "/": WEB_ROOT / "index.html",
-    "/index.html": WEB_ROOT / "index.html",
-    "/styles.css": WEB_ROOT / "styles.css",
-    "/app.js": WEB_ROOT / "app.js",
+REQUIRED_WEB_ASSETS = (
+    "index.html",
+    "styles.css",
+    "app.js",
+    "audio/audio-capture-worklet.js",
+    "audio/audio-controller.js",
+    "audio/pcm-capture.mjs",
+    "audio/pcm-player-worklet.js",
+    "audio/pcm-ring-buffer.mjs",
+    "audio/playback-handshake.mjs",
+)
+STATIC_ROUTES = {
+    "/": "index.html",
+    **{f"/{relative}": relative for relative in REQUIRED_WEB_ASSETS},
 }
 SESSION_PATH = re.compile(
     r"^/api/sessions/(?P<session>demo-session-[0-9]{4,12})/"
@@ -102,8 +110,12 @@ class DemoApplication:
 class DemoServer(ThreadingHTTPServer):
     daemon_threads = True
 
-    def __init__(self, address: tuple[str, int]) -> None:
+    def __init__(self, address: tuple[str, int], web_root: Path) -> None:
         self.application = DemoApplication()
+        self.static_files = {
+            route: web_root.joinpath(*Path(relative).parts)
+            for route, relative in STATIC_ROUTES.items()
+        }
         super().__init__(address, DemoRequestHandler)
 
 
@@ -114,14 +126,15 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
         ".html": "text/html; charset=utf-8",
         ".css": "text/css; charset=utf-8",
         ".js": "text/javascript; charset=utf-8",
+        ".mjs": "text/javascript; charset=utf-8",
     }
 
     def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
         try:
             self._validate_local_request()
             path = urlsplit(self.path).path
-            if path in STATIC_FILES:
-                self._serve_static(STATIC_FILES[path])
+            if path in self.server.static_files:
+                self._serve_static(self.server.static_files[path])
                 return
             media_match = MEDIA_PATH.fullmatch(path)
             if media_match:
@@ -356,9 +369,37 @@ def _require_loopback(host: str) -> None:
         raise ValueError("demo_host_must_be_loopback")
 
 
+def _validate_web_root(root: Path) -> Path:
+    if root.is_symlink() or not root.is_dir():
+        raise RuntimeError("required_web_assets_unavailable")
+    for relative in REQUIRED_WEB_ASSETS:
+        asset = root.joinpath(*Path(relative).parts)
+        if asset.is_symlink() or not asset.is_file():
+            raise RuntimeError("required_web_assets_unavailable")
+    return root
+
+
+def resolve_web_root(module_file: Path | None = None) -> Path:
+    """Return a complete package-local tree or a proven source-layout tree."""
+
+    resolved_module = (module_file or Path(__file__)).resolve()
+    package_root = resolved_module.parent / "web"
+    if package_root.exists() or package_root.is_symlink():
+        return _validate_web_root(package_root)
+
+    try:
+        project_root = resolved_module.parents[2]
+    except IndexError as exc:
+        raise RuntimeError("required_web_assets_unavailable") from exc
+    expected_package = project_root / "src" / "voice_study_companion"
+    if resolved_module.parent != expected_package.resolve():
+        raise RuntimeError("required_web_assets_unavailable")
+    return _validate_web_root(project_root / "web")
+
+
 def make_server(host: str = "127.0.0.1", port: int = 8765) -> DemoServer:
     _require_loopback(host)
-    return DemoServer((host, port))
+    return DemoServer((host, port), resolve_web_root())
 
 
 def main(argv: list[str] | None = None) -> int:

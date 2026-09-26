@@ -6,14 +6,20 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sysconfig
 import threading
 from http import HTTPStatus
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
+import voice_study_companion.server as server_module
 from voice_study_companion.config import RuntimeMode, load_runtime_config
-from voice_study_companion.server import make_server
+from voice_study_companion.server import (
+    REQUIRED_WEB_ASSETS,
+    make_server,
+    resolve_web_root,
+)
 
 
 REPORT_SCHEMA = "voice-study-companion.container-smoke-report"
@@ -69,12 +75,49 @@ def _post(
     return document
 
 
-def run_smoke() -> dict[str, object]:
+def _validate_runtime_distribution(
+    *,
+    require_installed: bool,
+    module_file: Path | None = None,
+    purelib: Path | None = None,
+) -> str:
+    resolved_module = (
+        module_file or Path(server_module.__file__ or "")
+    ).resolve()
+    try:
+        web_root = resolve_web_root(resolved_module)
+    except RuntimeError as exc:
+        raise SmokeError("required_web_assets_unavailable") from exc
+
+    package_web_root = resolved_module.parent / "web"
+    if require_installed:
+        installed_root = (purelib or Path(sysconfig.get_path("purelib"))).resolve()
+        try:
+            resolved_module.relative_to(installed_root)
+        except ValueError as exc:
+            raise SmokeError("module_not_loaded_from_installed_environment") from exc
+        if web_root != package_web_root:
+            raise SmokeError("installed_web_assets_not_package_local")
+        provenance = "installed-wheel"
+    else:
+        provenance = "package-local" if web_root == package_web_root else "source-layout"
+
+    for relative in REQUIRED_WEB_ASSETS:
+        asset = web_root.joinpath(*Path(relative).parts)
+        if asset.is_symlink() or not asset.is_file():
+            raise SmokeError("required_web_assets_unavailable")
+    return provenance
+
+
+def run_smoke(*, require_installed: bool = False) -> dict[str, object]:
     if any(os.environ.get(name) for name in LIVE_CONFIGURATION):
         raise SmokeError("live_configuration_must_be_absent")
     config = load_runtime_config(os.environ)
     if config.mode is not RuntimeMode.DEMO or config.uses_external_services:
         raise SmokeError("credential_free_demo_mode_required")
+    module_provenance = _validate_runtime_distribution(
+        require_installed=require_installed
+    )
 
     server = make_server(host="127.0.0.1", port=0)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -86,6 +129,13 @@ def run_smoke() -> dict[str, object]:
             raise SmokeError("homepage_unavailable")
         if b"Voice Study Companion" not in homepage:
             raise SmokeError("public_brand_missing")
+        for relative in REQUIRED_WEB_ASSETS:
+            asset_status, _asset_type, asset_content = _request(
+                base_url,
+                f"/{relative}",
+            )
+            if asset_status != HTTPStatus.OK or not asset_content:
+                raise SmokeError("required_web_asset_unavailable")
 
         opened = _post(base_url, "/api/sessions", {"profile": "full"})
         session_id = opened.get("session_id")
@@ -141,6 +191,9 @@ def run_smoke() -> dict[str, object]:
         "status": "PASS",
         "mode": "demo",
         "external_services_enabled": False,
+        "module_provenance": module_provenance,
+        "required_web_assets": len(REQUIRED_WEB_ASSETS),
+        "served_web_assets": len(REQUIRED_WEB_ASSETS),
         "lifecycle_steps": 7,
     }
 
@@ -148,8 +201,9 @@ def run_smoke() -> dict[str, object]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run the offline container demo smoke")
     parser.add_argument("--report", type=Path, required=True)
+    parser.add_argument("--require-installed", action="store_true")
     args = parser.parse_args(argv)
-    result = run_smoke()
+    result = run_smoke(require_installed=args.require_installed)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(
         json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n",

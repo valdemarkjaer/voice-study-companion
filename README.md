@@ -1,10 +1,15 @@
 # Voice Study Companion
 
-Voice Study Companion is a local, credential-free demonstration of a calmer
-voice-study workflow: think at your own pace, receive structured feedback, and
-reveal the official answer only when you ask for it.
+[![Quality gates](https://github.com/valdemarkjaer/voice-study-companion/actions/workflows/quality-gates.yml/badge.svg)](https://github.com/valdemarkjaer/voice-study-companion/actions/workflows/quality-gates.yml)
 
-> **Scope:** source-only portfolio showcase. It includes a loopback demo and
+Voice Study Companion demonstrates a calmer voice-study workflow: think at
+your own pace, receive structured feedback, and reveal the official answer only
+when you ask for it. It runs locally without credentials or a paid provider.
+
+Created by **Valdemar Katayama Kjaer** as a portfolio study in voice interaction,
+explicit state boundaries, provider-neutral design, and reproducible evidence.
+
+> **Scope:** source-repository portfolio showcase. It includes a loopback demo and
 > reproducible evidence, but it is not a hosted service, production deployment,
 > native application, or statement about any external environment.
 
@@ -54,6 +59,20 @@ conversation. This project explores a stricter interaction model:
 The result is a small reference implementation and portfolio case study, not a
 clinical product or a replacement scheduler.
 
+## Engineering highlights
+
+- **Answer isolation by construction.** The official answer is absent from
+  pre-answer context and crosses a separate reveal boundary only on request.
+- **Provider-neutral contracts.** Transcription, evaluation, speech,
+  synchronization, and review authority are independent interfaces exercised by
+  deterministic local adapters.
+- **Artifact-level verification.** CI installs and runs the built wheel, tests
+  the full synthetic lifecycle in a network-isolated container, and exercises
+  responsive and selected accessibility behavior in Chromium and WebKit.
+- **Reviewable evidence.** Versioned claims, provenance, dependency licenses,
+  media review, and clean-history export make limitations as inspectable as the
+  implementation.
+
 ## Run the local demo
 
 Prerequisites:
@@ -75,6 +94,23 @@ Open `http://localhost:8765`. The server deliberately accepts loopback binding
 only. Stop it with `Ctrl+C`. Keep `VSC_MODE=demo`: names reserved for future
 live-adapter configuration document a schema only, and the bundled server
 rejects live mode because this showcase ships no live adapter.
+
+To verify the installable artifact rather than run from the checkout:
+
+```bash
+python3 -m pip install --disable-pip-version-check \
+  --require-hashes --no-deps -r requirements-build.lock
+python3 -m pip wheel --disable-pip-version-check \
+  --no-build-isolation --no-deps --wheel-dir dist .
+artifact_root="$(mktemp -d)"
+python3 -m venv "$artifact_root/venv"
+"$artifact_root/venv/bin/python" -m pip install \
+  --no-index --no-deps dist/*.whl
+cd "$artifact_root"
+VSC_MODE=demo "$artifact_root/venv/bin/voice-study-companion"
+```
+
+This builds from the checkout; the project is not presented as a PyPI release.
 
 Run the dependency-free Python tests:
 
@@ -127,7 +163,7 @@ Prominent statements in this README map to the versioned
 | Bilingual terminology | `AUTOMATED-VERIFIED` | Curated Portuguese/English behavior with a bounded glossary |
 | Structured partial credit | `AUTOMATED-VERIFIED` | Study feedback only; never clinical judgment |
 | Complete and transit profiles | `AUTOMATED-VERIFIED` | Transit selection explicitly excludes cards with media |
-| Responsive and accessible web coverage | `AUTOMATED-VERIFIED` | Chromium/WebKit viewport, keyboard, focus, naming, contrast, reduced-motion, and voice-status checks; not native-device certification |
+| Responsive web + selected accessibility checks | `AUTOMATED-VERIFIED` | Chromium/WebKit phone, tablet, and desktop walkthroughs with selected keyboard, focus, naming, contrast, reduced-motion, voice-status, and image checks; not a complete WCAG audit or device certification |
 | Slow-recall aggregation | `EXPERIMENTAL` | Limited implementation outside this deterministic demo |
 | Coordinated multidevice presence | `PLANNED` | Explicitly outside this showcase |
 
@@ -143,7 +179,9 @@ Prominent statements in this README map to the versioned
 In demo mode, sessions live in process memory, static and generated media are
 served from the loopback-only process, default request logging is disabled,
 and no learner response is persisted. The fake speech output is generated
-locally. External model cost is therefore **US$ 0.00** for the included demo.
+locally. The bundled demo makes no paid provider or model API calls, so its
+external provider/API usage cost is **US$ 0.00**. This excludes local compute
+and connectivity costs.
 
 That statement does not predict the price or privacy posture of a future live
 provider. Any such adapter must declare its route capabilities, retention
@@ -166,8 +204,9 @@ open, modify, or synchronize a real collection.
 - “Voice” in the credential-free demo is simulated input plus a deterministic
   audible tone; it is not natural speech synthesis or a live conversation.
 - The demo is not medical advice and does not validate clinical correctness.
-- Browser viewport automation is not evidence of native-app behavior or every
-  phone/tablet lifecycle.
+- Targeted Chromium/WebKit automation is not a complete WCAG conformance audit,
+  Safari/iOS certification, native-app certification, real-device acceptance,
+  or evidence for every phone/tablet lifecycle.
 - The curated bilingual glossary is intentionally finite.
 - No real collection, scheduler, media library, paid provider, or cloud sync is
   bundled.

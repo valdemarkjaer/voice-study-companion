@@ -146,7 +146,9 @@ All state is process-local:
    side effect.
 
 No model endpoint, collection service, analytics sink, or external storage is
-part of this path.
+part of this path. The deterministic demo therefore incurs US$0 in external
+model/API usage; that statement excludes local compute and connectivity and is
+not a price guarantee for a future live provider.
 
 ## Deliberate trade-offs
 
@@ -163,9 +165,11 @@ part of this path.
 
 Capability wording and status are versioned in
 [`../evidence/claims.json`](../evidence/claims.json). `AUTOMATED-VERIFIED`
-means covered by passing automated evidence; it is not a claim of universal
-real-device behavior. Planned ambient or coordinated multidevice presence is
-outside this showcase.
+means covered by passing automated evidence. For the responsive web surface,
+selected checks run in pinned Chromium and WebKit across phone, tablet, and
+desktop viewports. They do not establish complete WCAG conformance, Safari or
+iOS certification, native-app certification, or real-device acceptance.
+Planned ambient or coordinated multidevice presence is outside this showcase.
 
 <!-- claim:responsive_web_coverage -->
 <!-- claim:multidevice_presence_boundary -->

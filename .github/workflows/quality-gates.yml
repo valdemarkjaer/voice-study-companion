@@ -46,8 +46,8 @@ jobs:
           --name dependency-license
           --report "$RUNNER_TEMP/reports/dependency-license.json"
           -- python tools/generate_dependency_report.py --check
-      - name: Run at least 92 Python unit tests
-        run: python tools/ci_quality.py unit --minimum 92 --report "$RUNNER_TEMP/reports/python-unit.json"
+      - name: Run at least 102 Python unit tests
+        run: python tools/ci_quality.py unit --minimum 102 --report "$RUNNER_TEMP/reports/python-unit.json"
       - name: Install the hash-locked build toolchain
         run: >-
           python -m pip install
@@ -66,6 +66,48 @@ jobs:
           --no-deps
           --wheel-dir "$RUNNER_TEMP/wheels"
           .
+      - name: Install and smoke the exact wheel outside the checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          artifact_venv="$RUNNER_TEMP/installed-wheel-venv"
+          smoke_work="$RUNNER_TEMP/installed-wheel-work"
+          python -m venv "$artifact_venv"
+          mapfile -t wheels < <(find "$RUNNER_TEMP/wheels" -maxdepth 1 -type f -name '*.whl' -print)
+          test "${#wheels[@]}" -eq 1
+          env -u PYTHONPATH "$artifact_venv/bin/python" -m pip install \
+            --disable-pip-version-check --no-index --no-deps "${wheels[0]}"
+          console_log="$RUNNER_TEMP/installed-wheel-console.log"
+          console_pid=""
+          cleanup_console() {
+            if [[ -n "$console_pid" ]] && kill -0 "$console_pid" 2>/dev/null; then
+              kill "$console_pid" 2>/dev/null || true
+              wait "$console_pid" 2>/dev/null || true
+            fi
+          }
+          trap cleanup_console EXIT
+          env -u PYTHONPATH PYTHONUNBUFFERED=1 \
+            "$artifact_venv/bin/voice-study-companion" --port 0 \
+            >"$console_log" 2>&1 &
+          console_pid=$!
+          for _attempt in {1..50}; do
+            grep -q '^Voice Study Companion demo: http://127.0.0.1:' "$console_log" && break
+            kill -0 "$console_pid"
+            sleep 0.1
+          done
+          grep -q '^Voice Study Companion demo: http://127.0.0.1:' "$console_log"
+          kill "$console_pid"
+          wait_status=0
+          wait "$console_pid" || wait_status=$?
+          test "$wait_status" -eq 0 || test "$wait_status" -eq 143
+          console_pid=""
+          trap - EXIT
+          mkdir -p "$smoke_work"
+          cd "$smoke_work"
+          env -u PYTHONPATH "$artifact_venv/bin/python" \
+            "$GITHUB_WORKSPACE/tools/container_demo_smoke.py" \
+            --require-installed \
+            --report "$RUNNER_TEMP/reports/installed-wheel-smoke.json"
       - name: Upload sanitized Python review reports
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
@@ -76,6 +118,7 @@ jobs:
             ${{ runner.temp }}/reports/dependency-license.json
             ${{ runner.temp }}/reports/python-unit.json
             ${{ runner.temp }}/reports/clean-build.json
+            ${{ runner.temp }}/reports/installed-wheel-smoke.json
           if-no-files-found: warn
           retention-days: 7
 
@@ -124,21 +167,45 @@ jobs:
           retention-days: 7
 
   container-smoke:
-    name: Network-isolated container demo smoke
+    name: Installed-wheel network-isolated container smoke
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - name: Check out the exported candidate
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+      - name: Install locked Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: 3.12.14
       - name: Prepare report directory
         run: mkdir -p "$RUNNER_TEMP/reports"
+      - name: Install the hash-locked build toolchain
+        run: >-
+          python -m pip install
+          --disable-pip-version-check
+          --require-hashes
+          --no-deps
+          -r requirements-build.lock
+      - name: Build the single wheel before network isolation
+        run: >-
+          python tools/ci_quality.py run
+          --name container-wheel-build
+          --report "$RUNNER_TEMP/reports/container-wheel-build.json"
+          -- python -m pip wheel
+          --disable-pip-version-check
+          --no-build-isolation
+          --no-deps
+          --wheel-dir "$RUNNER_TEMP/container-wheels"
+          .
       - name: Pull the digest-pinned Python image
         run: >-
           docker pull
           docker.io/library/python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
-      - name: Run the complete demo smoke without network or credentials
+      - name: Install and smoke that wheel without network or credentials
         run: |
           docker run --rm \
             --network none \
@@ -150,20 +217,34 @@ jobs:
             --cpus 1 \
             --user "$(id -u):$(id -g)" \
             --tmpfs /tmp:rw,noexec,nosuid,nodev,size=16m \
+            --tmpfs "/runtime:rw,exec,nosuid,nodev,size=64m,uid=$(id -u),gid=$(id -g),mode=0700" \
             --env PYTHONDONTWRITEBYTECODE=1 \
-            --env PYTHONPATH=src \
             --env VSC_MODE=demo \
-            --volume "$GITHUB_WORKSPACE:/project:ro" \
+            --volume "$RUNNER_TEMP/container-wheels:/wheels:ro" \
+            --volume "$GITHUB_WORKSPACE/tools/container_demo_smoke.py:/runner.py:ro" \
             --volume "$RUNNER_TEMP/reports:/reports:rw" \
-            --workdir /project \
+            --workdir /runtime \
             docker.io/library/python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e \
-            python tools/container_demo_smoke.py --report /reports/container-smoke.json
+            sh -eu -c '
+              set -- /wheels/*.whl
+              test "$#" -eq 1
+              test -f "$1"
+              python -m venv /runtime/venv
+              /runtime/venv/bin/python -m pip install \
+                --disable-pip-version-check --no-index --no-deps --no-compile \
+                --no-cache-dir "$1"
+              cd /runtime
+              env -u PYTHONPATH /runtime/venv/bin/python -I /runner.py \
+                --require-installed --report /reports/container-smoke.json
+            '
       - name: Upload sanitized container review report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: container-smoke-report
-          path: ${{ runner.temp }}/reports/container-smoke.json
+          path: |
+            ${{ runner.temp }}/reports/container-wheel-build.json
+            ${{ runner.temp }}/reports/container-smoke.json
           if-no-files-found: warn
           retention-days: 7
 

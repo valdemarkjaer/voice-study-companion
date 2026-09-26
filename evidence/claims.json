@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "voice-study-companion",
-  "evidence_date": "2026-09-22",
+  "evidence_date": "2026-09-25",
   "status_definitions": {
     "IMPLEMENTED": "The behavior exists in source but is not covered by the automated evidence identified in this ledger.",
     "AUTOMATED-VERIFIED": "The behavior is covered by passing automated tests identified in the public evidence index; this status is not live-system certification.",
@@ -95,13 +95,6 @@
       ]
     },
     {
-      "id": "EV-COST-ROUTING",
-      "public_targets": [
-        "docs/architecture.md",
-        "src/voice_study_companion/core/routing.py"
-      ]
-    },
-    {
       "id": "EV-RESPONSIVE-WEB",
       "public_targets": [
         "tests/browser/demo-ui.test.mjs",
@@ -139,7 +132,7 @@
     {
       "id": "provider_neutral_voice_core",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "The voice-study core separates transcription, dialogue, grading, speech synthesis, turn detection, and transport behind provider-neutral contracts.",
       "evidence_refs": ["EV-CORE-CONTRACTS"],
@@ -149,7 +142,7 @@
     {
       "id": "protected_preanswer_context",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "The official answer is structurally absent from pre-answer model context and becomes available only after the reveal boundary.",
       "evidence_refs": ["EV-PREANSWER-CONTEXT"],
@@ -159,7 +152,7 @@
     {
       "id": "bilingual_terminology",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "The tutoring layer supports deterministic Brazilian Portuguese and English response selection, mixed-language turns, scoped medical-abbreviation expansion, and explicit ambiguity handling.",
       "evidence_refs": ["EV-BILINGUAL-TERMINOLOGY"],
@@ -169,7 +162,7 @@
     {
       "id": "structured_partial_credit",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "The grading contract distinguishes correct, partial, incorrect, and ungradable answers, identifies covered or missing concepts, and fails closed on malformed, contradictory, or low-confidence output.",
       "evidence_refs": ["EV-STRUCTURED-GRADING"],
@@ -179,7 +172,7 @@
     {
       "id": "learner_confirmed_review",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "A proposed study rating remains inert until the learner explicitly confirms it; transcript correction invalidates the prior grade and requires reevaluation.",
       "evidence_refs": ["EV-REVIEW-AUTHORITY"],
@@ -189,7 +182,7 @@
     {
       "id": "official_answer_on_request",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "After grading or a no-attempt reveal, the system waits silently; it reads only the answer side after an explicit request, while repeating or explaining the question requires a separate request.",
       "evidence_refs": ["EV-ANSWER-ON-REQUEST"],
@@ -199,7 +192,7 @@
     {
       "id": "phase_aware_audio_boundaries",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "Protected card readings wait for correlated producer completion and local audio drain, while open discussion uses a separate interruption path; microphone release does not depend on a fixed playback-duration timer.",
       "evidence_refs": ["EV-PHASE-AWARE-PLAYBACK"],
@@ -209,7 +202,7 @@
     {
       "id": "slow_recall_aggregation",
       "status": "EXPERIMENTAL",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "experimental-only",
       "allowed_wording": "The current voice route experimentally preserves ordered answer fragments across short recall pauses and supports explicit keep-thinking and finish controls.",
       "evidence_refs": ["EV-SLOW-RECALL"],
@@ -219,7 +212,7 @@
     {
       "id": "anki_compatibility_boundary",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "The integration leaves collection synchronization, due state, and scheduling with a user-owned Anki installation while using tokenized, idempotent reveal and review operations at the application boundary.",
       "evidence_refs": ["EV-ANKI-BOUNDARY"],
@@ -229,7 +222,7 @@
     {
       "id": "media_aware_transit_study",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
       "allowed_wording": "An explicit transit profile can exclude cards requiring visual interaction without silently falling back to unconstrained selection; full study supports authorized card-media paths.",
       "evidence_refs": ["EV-MEDIA-TRANSIT"],
@@ -237,39 +230,29 @@
       "prohibited_overclaim": ["automatic transit detection", "supports every media format", "interprets clinical media"]
     },
     {
-      "id": "cost_and_route_observability",
-      "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
-      "publication_policy": "shipped-capability",
-      "allowed_wording": "The private voice pipeline records normalized usage and estimated cost, applies configurable warning and hard-limit policies, and keeps route capabilities explicit.",
-      "evidence_refs": ["EV-COST-ROUTING"],
-      "limitations": ["Provider prices and exchange rates are dated inputs; the credential-free public demo has no paid-model cost."],
-      "prohibited_overclaim": ["guaranteed low price", "current fixed budget in Brazilian reais", "measured public-demo paid-model cost"]
-    },
-    {
       "id": "responsive_web_coverage",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
-      "allowed_wording": "Automated Chromium and WebKit checks exercise the principal phone, tablet, and desktop viewport walkthroughs together with keyboard, focus, accessible-name, contrast, reduced-motion, and voice-status checks.",
+      "allowed_wording": "Selected automated accessibility checks run in pinned Chromium and WebKit across phone, tablet, and desktop viewports, exercising keyboard, focus, accessible-name, contrast, reduced-motion, image-alternative, and voice-status behavior.",
       "evidence_refs": ["EV-RESPONSIVE-WEB"],
-      "limitations": ["Viewport automation is not native-app or full real-device acceptance; permission, reconnect, orientation-change, and operating-system background lifecycle behavior remain outside this evidence."],
-      "prohibited_overclaim": ["native application support", "completed accessibility acceptance", "coordinated multidevice operation"]
+      "limitations": ["These selected checks do not establish complete WCAG conformance, Safari or iOS certification, native-app certification, or real-device acceptance; permission, reconnect, orientation-change, and operating-system background lifecycle behavior remain outside this evidence."],
+      "prohibited_overclaim": ["native application support", "completed accessibility acceptance", "fully WCAG conformant", "certified for Safari", "certified on iOS", "tested on real iPhones", "coordinated multidevice operation"]
     },
     {
       "id": "credential_free_public_demo",
       "status": "AUTOMATED-VERIFIED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "shipped-capability",
-      "allowed_wording": "This source-only showcase includes a deterministic local demonstration with original synthetic cards, fake providers, responsive web UI, and no required model, card-service, or private-network credentials.",
+      "allowed_wording": "This showcase includes a deterministic local demonstration with original synthetic cards, fake providers, responsive web UI, no required model, card-service, or private-network credentials, and no external model or API calls in demo mode.",
       "evidence_refs": ["EV-PUBLIC-DEMO-PLAN"],
-      "limitations": ["This repository is source-only; browser automation covers Chromium and WebKit viewports rather than native or real-device acceptance, and fake speech is an audible deterministic tone rather than natural synthesized speech."],
-      "prohibited_overclaim": ["a hosted service is included", "a production deployment is included", "the demo calls a live AI provider"]
+      "limitations": ["Any US$0 statement applies only to external model/API usage in deterministic demo mode, excluding local compute and connectivity, and is not a live-provider price guarantee. Browser automation is not native or real-device acceptance, and fake speech is an audible deterministic tone rather than natural synthesized speech."],
+      "prohibited_overclaim": ["a hosted service is included", "a production deployment is included", "the demo calls a live AI provider", "the demo has no operating cost", "live providers cost nothing"]
     },
     {
       "id": "general_assistant_separation_boundary",
       "status": "PLANNED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "future-work-only",
       "allowed_wording": "A future general personal-assistant system is separate planned work; Voice Study Companion is a study application, not that assistant.",
       "evidence_refs": ["EV-FUTURE-ASSISTANT-PLAN"],
@@ -279,7 +262,7 @@
     {
       "id": "multidevice_presence_boundary",
       "status": "PLANNED",
-      "evidence_date": "2026-09-22",
+      "evidence_date": "2026-09-25",
       "publication_policy": "future-work-only",
       "allowed_wording": "Coordinated cross-device sessions, voice-authority handoff, background lifecycle support, named-screen presentation, and shared visual attention remain planned and are outside the current showcase.",
       "evidence_refs": ["EV-MULTIDEVICE-PLAN"],

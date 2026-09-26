@@ -6,7 +6,7 @@ import path from "node:path";
 import test from "node:test";
 
 const require = createRequire(import.meta.url);
-const { chromium } = require("playwright");
+const { chromium, webkit } = require("playwright");
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../..",
@@ -17,13 +17,15 @@ const viewports = {
   tablet: { width: 820, height: 1_180 },
   desktop: { width: 1_440, height: 900 },
 };
+const browserTypes = { chromium, webkit };
 
-// Release policy: findings analogous to axe-core's critical/serious impacts
-// against WCAG A or AA block the candidate. Moderate/minor observations may
-// still be reported, but do not fail this gate.
+// Release policy: critical/serious findings from this selected, WCAG-informed
+// check set block the candidate. It is not a complete WCAG conformance audit.
+// Moderate/minor observations may still be reported, but do not fail this gate.
 const BLOCKING_IMPACTS = new Set(["critical", "serious"]);
 const RELEASE_THRESHOLD = Object.freeze({
   standards: ["WCAG 2.2 A", "WCAG 2.2 AA"],
+  scope: "selected automated checks, not complete conformance",
   blockingImpacts: [...BLOCKING_IMPACTS],
 });
 
@@ -171,6 +173,12 @@ async function tabTo(page, findings, expected, context) {
 }
 
 async function inspectFocusIndicator(page, findings, target) {
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  );
   const result = await page.evaluate(() => {
     function parseColor(value) {
       const channels = value.match(/[\d.]+/gu)?.map(Number) || [];
@@ -230,9 +238,18 @@ async function inspectFocusIndicator(page, findings, target) {
     const surrounding = backgroundFor(active.parentElement || document.body);
     const rect = active.getBoundingClientRect();
     return {
+      active:
+        active.id ||
+        (active.classList.contains("skip-link") ? ".skip-link" : active.tagName),
       outlineStyle: style.outlineStyle,
       outlineWidth: Number.parseFloat(style.outlineWidth),
       contrast: outline ? contrast(outline, surrounding) : 0,
+      rect: {
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        left: rect.left,
+      },
       visible:
         rect.width > 0 &&
         rect.height > 0 &&
@@ -255,7 +272,7 @@ async function inspectFocusIndicator(page, findings, target) {
       "serious",
       "2.4.7 AA; 2.4.11 AA",
       target,
-      `indicator visible=${result.visible}, style=${result.outlineStyle}, width=${result.outlineWidth}px, contrast=${result.contrast.toFixed(2)}:1`,
+      `active=${result.active}, indicator visible=${result.visible}, style=${result.outlineStyle}, width=${result.outlineWidth}px, contrast=${result.contrast.toFixed(2)}:1, rect=${JSON.stringify(result.rect)}`,
     );
   }
 }
@@ -719,27 +736,36 @@ async function exerciseKeyboardWalkthrough(page, findings, viewportName) {
   );
 }
 
-test("WCAG A/AA critical and serious findings block the public walkthrough", async (t) => {
+test("selected accessibility checks cover Chromium and WebKit viewports", async (t) => {
   const server = await startDemoServer();
   t.after(() => stopDemoServer(server));
-  const browser = await chromium.launch({ headless: true });
-  t.after(() => browser.close());
 
-  for (const [viewportName, viewport] of Object.entries(viewports)) {
-    await t.test(viewportName, async () => {
-      const findings = [];
-      const page = await browser.newPage({ viewport, reducedMotion: "reduce" });
-      await installObservers(page);
-      await page.goto(server.url, { waitUntil: "networkidle" });
+  for (const [browserName, browserType] of Object.entries(browserTypes)) {
+    await t.test(browserName, async (browserTest) => {
+      const browser = await browserType.launch({ headless: true });
+      browserTest.after(() => browser.close());
 
-      await inspectNamesAndRoles(page, findings);
-      await inspectReducedMotion(page, findings);
-      await inspectTextContrast(page, findings, "initial");
-      await exerciseKeyboardWalkthrough(page, findings, viewportName);
-      await inspectTextContrast(page, findings, "evaluated");
+      for (const [viewportName, viewport] of Object.entries(viewports)) {
+        await browserTest.test(viewportName, async () => {
+          const environment = `${browserName}/${viewportName}`;
+          const findings = [];
+          const page = await browser.newPage({
+            viewport,
+            reducedMotion: "reduce",
+          });
+          await installObservers(page);
+          await page.goto(server.url, { waitUntil: "networkidle" });
 
-      assertReleaseThreshold(findings, viewportName);
-      await page.close();
+          await inspectNamesAndRoles(page, findings);
+          await inspectReducedMotion(page, findings);
+          await inspectTextContrast(page, findings, `${environment} initial`);
+          await exerciseKeyboardWalkthrough(page, findings, environment);
+          await inspectTextContrast(page, findings, `${environment} evaluated`);
+
+          assertReleaseThreshold(findings, environment);
+          await page.close();
+        });
+      }
     });
   }
 });

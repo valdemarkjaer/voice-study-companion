@@ -391,7 +391,7 @@ def _parser() -> argparse.ArgumentParser:
 
     unit_parser = subparsers.add_parser("unit")
     unit_parser.add_argument("--report", type=Path, required=True)
-    unit_parser.add_argument("--minimum", type=int, default=92)
+    unit_parser.add_argument("--minimum", type=int, default=102)
 
     digest_parser = subparsers.add_parser("digest")
     digest_parser.add_argument("--report", type=Path, required=True)

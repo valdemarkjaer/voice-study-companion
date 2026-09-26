@@ -9,6 +9,7 @@ from urllib.request import Request, urlopen
 
 from voice_study_companion.server import (
     MAX_ACTIVE_SESSIONS,
+    REQUIRED_WEB_ASSETS,
     DemoApplication,
     DemoHttpError,
     make_server,
@@ -67,6 +68,17 @@ class DemoServerTests(unittest.TestCase):
         self.assertEqual(status, HTTPStatus.OK)
         self.assertIn("Voice Study Companion", rendered)
         self.assertIn("Sem nuvem", rendered)
+
+    def test_every_required_browser_and_audio_asset_is_served(self) -> None:
+        for relative in REQUIRED_WEB_ASSETS:
+            with self.subTest(asset=relative):
+                status, media_type, content = self.request(f"/{relative}")
+                self.assertEqual(status, HTTPStatus.OK)
+                self.assertTrue(
+                    media_type.startswith(("text/", "application/javascript")),
+                    media_type,
+                )
+                self.assertTrue(content)
 
     def test_http_walkthrough_keeps_answer_hidden_until_request(self) -> None:
         opened = self.post_json("/api/sessions", {"profile": "full"})

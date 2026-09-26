@@ -76,8 +76,10 @@ licensed course material. The public slice therefore uses:
 <!-- claim:credential_free_public_demo -->
 
 This is deliberately less spectacular than a live model call. It is more
-auditable: the main walkthrough is deterministic, has zero external model cost,
-and can be tested without credentials.
+auditable: the main walkthrough is deterministic, makes no external model or
+API calls, and can be tested without credentials. Its external model/API usage
+cost is therefore US$0 in deterministic demo mode. That scope excludes local
+compute and connectivity and makes no price claim about future live providers.
 
 ## What the demo proves
 
@@ -88,12 +90,14 @@ Automated evidence currently demonstrates:
 - the answer request returns only answer content;
 - complete and transit profiles select the intended synthetic cards;
 - simulated sync happens at session boundaries;
-- Chromium and WebKit viewport walkthroughs cover phone, tablet, and desktop
-  compositions;
+- pinned Chromium and WebKit automation covers phone, tablet, and desktop
+  viewport walkthroughs, including selected keyboard, focus, accessible-name,
+  contrast, reduced-motion, image-alternative, and voice-status checks;
 - the server rejects non-loopback binding and cross-origin mutation.
 
 It does **not** prove natural voice quality, every mobile lifecycle, acoustic
-echo cancellation, every provider adapter, native application behavior, or
+echo cancellation, every provider adapter, complete WCAG conformance, Safari
+or iOS certification, native-app certification, real-device acceptance, or
 coordinated multidevice presence.
 
 <!-- claim:responsive_web_coverage -->
@@ -115,7 +119,8 @@ adapter introduces latency, pricing, network, or audio-device variability.
 
 ## Boundaries beyond this showcase
 
-This repository deliberately stops at a source-only, local demonstration.
+This repository deliberately stops at an installable, loopback-only local
+demonstration.
 Repository hosting, release operations, and production deployment are
 governance and operational concerns outside its capability evidence. A future
 general assistant and coordinated ambient/multidevice presence are separate

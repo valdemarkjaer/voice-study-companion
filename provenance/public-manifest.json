@@ -6,8 +6,8 @@
       "mode": "0644",
       "path": ".github/workflows/quality-gates.yml",
       "provenance_id": "public_ci_workflow",
-      "sha256": "855a00edb3c7025e7118c6c887c7e48c2e37826f969243cb83a5dacad718925a",
-      "size": 7350
+      "sha256": "4f2d7b0f76e0e79f8088dac0686000093f5fb151272769d57cc67fe15d0ec47e",
+      "size": 10861
     },
     {
       "license": "Apache-2.0",
@@ -46,8 +46,8 @@
       "mode": "0644",
       "path": "README.md",
       "provenance_id": "public_readme",
-      "sha256": "805a3560a5a7ab620499858e4279354e5384c72d476850214936ae10a0c2706b",
-      "size": 8090
+      "sha256": "000b1211c65fe57ceeb0b5963336ddecd0e0ae581779363bdadfb183c98915f8",
+      "size": 10151
     },
     {
       "license": "Apache-2.0",
@@ -78,16 +78,16 @@
       "mode": "0644",
       "path": "docs/architecture.md",
       "provenance_id": "public_architecture_doc",
-      "sha256": "106e673423c06c9783c13dab055bdba4234a268294e6ea747a2b9050bfaecefb",
-      "size": 6805
+      "sha256": "3ffdecfac7d76fe46241963037dab157b7a32aca33f1ecd0b5d80f2700afa6fc",
+      "size": 7196
     },
     {
       "license": "Apache-2.0",
       "mode": "0644",
       "path": "docs/case-study.md",
       "provenance_id": "public_case_study_doc",
-      "sha256": "2547c124b77971381dab4a5db7741208c6694e2f0f5c6bde3a1decc33502b51f",
-      "size": 5318
+      "sha256": "1260c3d2e4736174b709702ea01f84bb80f250746284772c2fc26dd4ad34503f",
+      "size": 5734
     },
     {
       "license": "Apache-2.0",
@@ -102,8 +102,8 @@
       "mode": "0644",
       "path": "evidence/claims.json",
       "provenance_id": "public_claims_ledger",
-      "sha256": "04d6bd6ad3ca0d40cacb95070756740fd444f45cfcd6e64cd8711cf4bc015269",
-      "size": 14607
+      "sha256": "ca6d2226fd8d06a0a7e1836a75b2fba266fa2ae7813ee45bce6c9163d3df64b7",
+      "size": 14152
     },
     {
       "license": "MPL-2.0",
@@ -158,8 +158,8 @@
       "mode": "0644",
       "path": "pyproject.toml",
       "provenance_id": "public_demo_pyproject",
-      "sha256": "0c37d9812f2e02c2c9c1a7d7d43ee30f07e68b115184302c8c472da92b297396",
-      "size": 450
+      "sha256": "c716c42a6bc55208a89ef101bdb6997053c7d3120c12d41e019bb9271e63f677",
+      "size": 613
     },
     {
       "license": "Apache-2.0",
@@ -342,8 +342,8 @@
       "mode": "0644",
       "path": "src/voice_study_companion/server.py",
       "provenance_id": "public_demo_server_source",
-      "sha256": "0d8967c086be5947ae57da2f935c9888b4e556430ae61836f27ec9cd13381274",
-      "size": 15129
+      "sha256": "d3e57956c5f5ffcc2174a5f3ac6f80709a436648e12ac6b15bc5b44082d539e3",
+      "size": 16714
     },
     {
       "license": "Apache-2.0",
@@ -414,8 +414,8 @@
       "mode": "0644",
       "path": "tests/browser/accessibility.test.mjs",
       "provenance_id": "public_accessibility_browser_test",
-      "sha256": "95da9ba0814a902efb7ff3c0e81b34ee30f54f76f38c3b24f2bcd5817bc02818",
-      "size": 24553
+      "sha256": "86e277b29451d2f2eb64ff4e10a442079f96c2df89fc79db80d316ef9195659a",
+      "size": 25515
     },
     {
       "license": "Apache-2.0",
@@ -556,6 +556,14 @@
     {
       "license": "Apache-2.0",
       "mode": "0644",
+      "path": "tests/test_distribution.py",
+      "provenance_id": "public_demo_test_distribution",
+      "sha256": "2956f88c398d635473a4dc9178db2296f4422deda390f34a048eac637f4c91b6",
+      "size": 7132
+    },
+    {
+      "license": "Apache-2.0",
+      "mode": "0644",
       "path": "tests/test_fake_providers.py",
       "provenance_id": "public_demo_test_fake_providers",
       "sha256": "8a69ae53ddaeb594d0e27d95365fab5fbc3e7bb750cb3b3630a2c4e3a46dcbc0",
@@ -566,8 +574,8 @@
       "mode": "0644",
       "path": "tests/test_server.py",
       "provenance_id": "public_demo_test_server",
-      "sha256": "364970c0af83af4705fb6a4a9121a2d379d6a263e9cb01f0f2cfd3dacb8f80c8",
-      "size": 5180
+      "sha256": "a4ef99ab523c6f52918c34637a6a4bbedbb42afcd19e04c7df1f18cf92a897ea",
+      "size": 5710
     },
     {
       "license": "Apache-2.0",
@@ -622,16 +630,16 @@
       "mode": "0644",
       "path": "tools/ci_quality.py",
       "provenance_id": "public_ci_quality_tool",
-      "sha256": "ee3a84469edc922f9b49860033e36f61000dd373b1e260b59448643be9f81e4f",
-      "size": 14412
+      "sha256": "cf5a4501feb733b762e3d0e347126ff6cb4d095702b7a23101d9fdde4ee8bf0b",
+      "size": 14413
     },
     {
       "license": "Apache-2.0",
       "mode": "0644",
       "path": "tools/container_demo_smoke.py",
       "provenance_id": "public_container_demo_smoke_tool",
-      "sha256": "6643b1f9c4fc014e0a7a0f8a8ae2dbf5e8b12fa4142d0a5a1618ae28c9390471",
-      "size": 5897
+      "sha256": "137da2039876647d79bb14238c1c6110e2e8f9d17e0fb810fc26bbda38365aa8",
+      "size": 8006
     },
     {
       "license": "Apache-2.0",
@@ -714,7 +722,7 @@
       "size": 14414
     }
   ],
-  "payload_tree_sha256": "2f1f86fa00952b069f80ec1b2944e25c033afdefb025596e95c912f972e36793",
+  "payload_tree_sha256": "35e34d80ed1edf2f1125240b441caca684525306ff7c6856f9a64c46fbe6d7c6",
   "project": "voice-study-companion",
   "project_license": "Apache-2.0",
   "schema": "voice-study-companion.public-provenance",
